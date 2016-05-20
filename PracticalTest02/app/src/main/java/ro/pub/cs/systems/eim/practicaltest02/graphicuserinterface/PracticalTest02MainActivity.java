@@ -10,9 +10,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import ro.pub.cs.systems.eim.practicaltest02.R;
 import ro.pub.cs.systems.eim.practicaltest02.general.Constants;
-import ro.pub.cs.systems.eim.practicaltest02.network.ClientThread;
+import ro.pub.cs.systems.eim.practicaltest02.network.ClientThreadSend;
+import ro.pub.cs.systems.eim.practicaltest02.network.ClientThreadReceive;
 import ro.pub.cs.systems.eim.practicaltest02.network.ServerThread;
 
 public class PracticalTest02MainActivity extends AppCompatActivity {
@@ -33,7 +36,30 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
     private TextView resultTextView = null;
 
     private ServerThread serverThread = null;
-    private ClientThread clientThread = null;
+    private ClientThreadSend clientThreadSend = null;
+    private ClientThreadReceive clientThreadReceive = null;
+
+    HashMap<String, HashValue> hashData = new HashMap<String, HashValue>();
+
+
+    public class HashValue{
+        String value;
+        int date;
+
+        public HashValue(String Value, int createDate){
+            this.value = Value;
+            this.date = createDate;
+        }
+        public String GetValue(){
+            return this.value;
+        }
+
+        public int GetDate(){
+            return this.date;
+        }
+
+    }
+
 
     private ConnectButtonClickListener connectButtonClickListener = new ConnectButtonClickListener();
     private class ConnectButtonClickListener implements Button.OnClickListener {
@@ -60,8 +86,8 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
         }
     }
 
-    private GetWeatherForecastButtonClickListener submitButtonClickListener = new GetWeatherForecastButtonClickListener();
-    private class GetWeatherForecastButtonClickListener implements Button.OnClickListener {
+    private SubmitButtonClickListener submitButtonClickListener = new SubmitButtonClickListener();
+    private class SubmitButtonClickListener implements Button.OnClickListener {
 
         @Override
         public void onClick(View view) {
@@ -82,21 +108,23 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
                 return;
             }
 
-            //TODO
-//            String city = cityEditText.getText().toString();
+            String command = commandEditText.getText().toString();
 //            String informationType = informationTypeSpinner.getSelectedItem().toString();
-//            if (city == null || city.isEmpty() ||
-//                    informationType == null || informationType.isEmpty()) {
-//                Toast.makeText(
-//                        getApplicationContext(),
-//                        "Parameters from client (city / information type) should be filled!",
-//                        Toast.LENGTH_SHORT
-//                ).show();
-//                return;
-//            }
+            if ((command == null || command.isEmpty())) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Parameters from client should be filled!",
+                        Toast.LENGTH_SHORT
+                ).show();
+                return;
+            }
 //TODO
-//            weatherForecastTextView.setText(Constants.EMPTY_STRING);
-//
+            resultTextView.setText(Constants.EMPTY_STRING);
+
+
+            String cmd = commandEditText.getText().toString();
+            ClientThreadSend clientThread = new ClientThreadSend(clientAddress, Integer.parseInt(clientPort),"IP", "");
+            clientThread.start();
 //            clientThread = new ClientThread(
 //                    clientAddress,
 //                    Integer.parseInt(clientPort),

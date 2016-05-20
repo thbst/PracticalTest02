@@ -2,7 +2,7 @@ package ro.pub.cs.systems.eim.practicaltest02.model;
 
 import ro.pub.cs.systems.eim.practicaltest02.general.Constants;
 
-public class WeatherForecastInformation {
+public class TimeInformation {
 
     private String temperature;
     private String windSpeed;
@@ -10,7 +10,7 @@ public class WeatherForecastInformation {
     private String pressure;
     private String humidity;
 
-    public WeatherForecastInformation() {
+    public TimeInformation() {
         this.temperature = null;
         this.windSpeed = null;
         this.condition = null;
@@ -18,7 +18,7 @@ public class WeatherForecastInformation {
         this.humidity = null;
     }
 
-    public WeatherForecastInformation(
+    public TimeInformation(
             String temperature,
             String windSpeed,
             String condition,

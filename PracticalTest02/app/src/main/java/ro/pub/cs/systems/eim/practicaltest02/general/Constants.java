@@ -3,10 +3,9 @@ package ro.pub.cs.systems.eim.practicaltest02.general;
 public interface Constants {
 
     final public static String TAG = "[PracticalTest02]";
+    final public String WEB_SERVICE_ADDRESS = "http://www.timeapi.org/utc/now";
 
     final public static boolean DEBUG = true;
-
-    final public static String WEB_SERVICE_ADDRESS = "https://www.wunderground.com/cgi-bin/findweather/getForecast";
 
     final public static String TEMPERATURE = "temperature";
     final public static String WIND_SPEED = "wind_speed";
